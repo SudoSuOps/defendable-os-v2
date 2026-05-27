@@ -34,7 +34,7 @@ npm run preview    # serve the built dist/ locally
 ### Contact form (Cloudflare Pages Function + Resend)
 
 The `/contact` form POSTs to `functions/api/contact.ts`, a Pages Function that
-sends the message via [Resend](https://resend.com) to `defend@defendableos.com`.
+sends the message via [Resend](https://resend.com) to `build@defendableos.com`.
 
 Set one secret in **Cloudflare Pages → Settings → Environment variables**
 (for **both** Production and Preview):

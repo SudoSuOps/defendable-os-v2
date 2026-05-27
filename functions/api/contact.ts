@@ -1,7 +1,7 @@
 // Cloudflare Pages Function · POST /api/contact
 //
 // Backs the /contact form on defendableos.com. Sends the submission via
-// Resend so it lands at defend@defendableos.com — the Resend-verified sender
+// Resend so it lands at build@defendableos.com — the Resend-verified sender
 // domain for the Defendable brand stack.
 //
 // REQUIRED env var (Cloudflare Pages → Settings → Environment variables ·
@@ -10,8 +10,8 @@
 //   RESEND_API_KEY = re_...
 //
 // OPTIONAL overrides:
-//   CONTACT_TO_EMAIL    (default: defend@defendableos.com)
-//   CONTACT_FROM_EMAIL  (default: defend@defendableos.com · must be on a
+//   CONTACT_TO_EMAIL    (default: build@defendableos.com)
+//   CONTACT_FROM_EMAIL  (default: build@defendableos.com · must be on a
 //                        Resend-verified domain)
 
 interface Env {
@@ -42,8 +42,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ error: "RESEND_API_KEY not configured" }, 503);
   }
 
-  const TO = env.CONTACT_TO_EMAIL || "defend@defendableos.com";
-  const FROM = env.CONTACT_FROM_EMAIL || "DefendableOS <defend@defendableos.com>";
+  const TO = env.CONTACT_TO_EMAIL || "build@defendableos.com";
+  const FROM = env.CONTACT_FROM_EMAIL || "DefendableOS <build@defendableos.com>";
 
   let body: ContactPayload;
   try {
