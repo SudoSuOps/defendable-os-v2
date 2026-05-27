@@ -1,0 +1,21 @@
+# build output
+dist/
+.output/
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# secrets
+.env
+.env.local
+.env.*.local
+
+# logs / OS / editor
+*.log
+.DS_Store
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,20 @@
+{
+  "name": "defendable-os-v2",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DefendableOS — Proof of Value. The public site for evidence-backed AI accountability.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^5.1.0",
+    "@astrojs/tailwind": "^6.0.0",
+    "@astrojs/sitemap": "^3.2.0",
+    "tailwindcss": "^3.4.17"
+  }
+}
