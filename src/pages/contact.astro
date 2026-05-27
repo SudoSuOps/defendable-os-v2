@@ -4,11 +4,18 @@ import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 
 const email = "build@swarmandbee.ai";
-const subject = encodeURIComponent("DefendableOS — let's talk");
-const body = encodeURIComponent(
-  "Where AI is running in our business:\n\nWhat we need to prove:\n\nBest way to reach us:\n",
-);
-const mailto = `mailto:${email}?subject=${subject}&body=${body}`;
+
+const lanes = [
+  { value: "build", label: "Build / dev / pilot" },
+  { value: "defense", label: "Defense / compliance / audit" },
+  { value: "partner", label: "Partner / contributor" },
+  { value: "press", label: "Press / analyst" },
+  { value: "other", label: "Other" },
+];
+
+const field =
+  "w-full rounded-md border border-white/10 bg-white/[0.03] px-3.5 py-2.5 text-sm text-paper placeholder:text-paper/35 transition-colors focus:border-honey-400/50 focus:outline-none focus:ring-1 focus:ring-honey-400/40";
+const label = "block text-xs font-medium uppercase tracking-widest text-paper/50";
 ---
 
 <Layout
@@ -27,56 +34,124 @@ const mailto = `mailto:${email}?subject=${subject}&body=${body}`;
           Make the dial.
         </h1>
         <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-paper/70">
-          The fastest way to start is a straight conversation. Tell us where AI is running in your
-          business and what you need to be able to prove. We'll tell you plainly whether
-          DefendableOS is a fit.
+          Tell us where AI is running in your business and what you need to be able to prove. We
+          read every note ourselves and reply straight on whether DefendableOS is a fit.
         </p>
-
-        <div class="mt-10">
-          <a
-            href={mailto}
-            class="inline-block rounded-md bg-honey-300 px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-honey-200"
-          >
-            Email {email}
-          </a>
-        </div>
       </div>
     </section>
 
-    <section class="mx-auto max-w-3xl px-6 py-16 md:py-20">
-      <div class="reveal grid gap-10 text-left md:grid-cols-2">
-        <div>
-          <h2 class="text-xl font-semibold text-paper">What to include</h2>
-          <ul class="mt-4 space-y-3 text-paper/70">
-            <li class="flex gap-3">
-              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-honey-300"></span>
-              <span>Where AI is doing real work in your business today.</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-honey-300"></span>
-              <span>What you need to be able to prove — and to whom.</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-honey-300"></span>
-              <span>The best way and time to reach you.</span>
-            </li>
-          </ul>
+    <section class="mx-auto max-w-2xl px-6 py-16 md:py-20">
+      <form id="contact-form" class="reveal space-y-5 text-left" novalidate>
+        <!-- Honeypot · hidden from humans, catches naive bots. -->
+        <div class="absolute -left-[9999px]" aria-hidden="true">
+          <label>Company URL <input type="text" name="company_url" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label class={label} for="name">Name</label>
+            <input class={`mt-2 ${field}`} id="name" name="name" type="text" required autocomplete="name" />
+          </div>
+          <div>
+            <label class={label} for="email">Email</label>
+            <input class={`mt-2 ${field}`} id="email" name="email" type="email" required autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label class={label} for="company">Company <span class="text-paper/30">(optional)</span></label>
+            <input class={`mt-2 ${field}`} id="company" name="company" type="text" autocomplete="organization" />
+          </div>
+          <div>
+            <label class={label} for="lane">What brings you in</label>
+            <select class={`mt-2 ${field}`} id="lane" name="lane">
+              {lanes.map((l) => <option value={l.value}>{l.label}</option>)}
+            </select>
+          </div>
         </div>
 
         <div>
-          <h2 class="text-xl font-semibold text-paper">What happens next</h2>
-          <p class="mt-4 leading-relaxed text-paper/70">
-            We read every note ourselves. If there's a fit, you'll hear back from a person — not a
-            sequence — with a clear read on whether we can put a proof layer behind your AI work,
-            and what that would take.
-          </p>
-          <p class="mt-6 text-sm text-paper/50">
-            Swarm and Bee LLC · DBA Swarm &amp; Bee AI · Florida · D-U-N-S 138652395
+          <label class={label} for="message">Message</label>
+          <textarea
+            class={`mt-2 ${field} resize-y`}
+            id="message"
+            name="message"
+            rows="5"
+            required
+            placeholder="Where AI is running, what you need to prove, and the best way to reach you."></textarea>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-4 pt-1">
+          <button
+            id="contact-submit"
+            type="submit"
+            class="rounded-md bg-honey-300 px-7 py-3 text-sm font-semibold text-ink transition-colors hover:bg-honey-200 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            Send it
+          </button>
+          <p class="text-sm text-paper/45">
+            Prefer email? <a class="text-honey-200 hover:text-honey-100" href={`mailto:${email}`}>{email}</a>
           </p>
         </div>
-      </div>
+
+        <p id="contact-status" class="text-sm" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="mt-10 border-t border-white/5 pt-6 text-center text-xs text-paper/40">
+        Swarm and Bee LLC · DBA Swarm &amp; Bee AI · Florida · D-U-N-S 138652395
+      </p>
     </section>
   </main>
 
   <Footer />
 </Layout>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const btn = document.getElementById("contact-submit") as HTMLButtonElement | null;
+  const status = document.getElementById("contact-status");
+
+  if (form && btn && status) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      status.textContent = "";
+      status.className = "text-sm";
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      if (!data.name || !data.email || !data.message) {
+        status.textContent = "Name, email, and message are required.";
+        status.className = "text-sm text-red-400";
+        return;
+      }
+
+      btn.disabled = true;
+      const original = btn.textContent;
+      btn.textContent = "Sending…";
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const out = await res.json().catch(() => ({}));
+        if (res.ok && out.ok) {
+          form.reset();
+          status.textContent = "Got it. We'll be in touch — to the shed.";
+          status.className = "text-sm text-honey-200";
+        } else {
+          status.textContent = out.error || "Something went wrong. Email us directly.";
+          status.className = "text-sm text-red-400";
+        }
+      } catch {
+        status.textContent = "Network hiccup. Email us directly at build@swarmandbee.ai.";
+        status.className = "text-sm text-red-400";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    });
+  }
+</script>

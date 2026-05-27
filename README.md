@@ -30,7 +30,26 @@ npm run preview    # serve the built dist/ locally
 - **Build command:** `npm run build`
 - **Output directory:** `dist`
 - **Framework preset:** Astro
-- No environment variables or secrets required (fully static).
+
+### Contact form (Cloudflare Pages Function + Resend)
+
+The `/contact` form POSTs to `functions/api/contact.ts`, a Pages Function that
+sends the message via [Resend](https://resend.com) to `build@swarmandbee.ai`.
+
+Set one secret in **Cloudflare Pages → Settings → Environment variables**
+(for **both** Production and Preview):
+
+```
+RESEND_API_KEY = re_...
+```
+
+Optional overrides: `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` (the from address
+must be on a Resend-verified domain — `swarmandbee.ai` is the verified sender
+for the Defendable stack). Without the key set, the form returns a 503 and the
+page falls back to the `mailto:` link.
+
+Test Functions locally with `npx wrangler pages dev dist` (the plain Astro dev
+server does not run `functions/`).
 
 Point the existing `defendableos.com` Pages project at this repo (or create a new
 Pages project and re-map the custom domain). The previous site lives in the
