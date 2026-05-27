@@ -50,7 +50,7 @@ Every DefendableOS run can produce a complete, portable proof set:
 
 ## Contact
 
-Email: build@swarmandbee.ai
+Email: build@defendableos.com
 Hugging Face: https://huggingface.co/SwarmandBee
 X: https://x.com/swarmandbee
 GitHub: https://github.com/SudoSuOps
