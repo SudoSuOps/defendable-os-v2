@@ -55,6 +55,12 @@ Point the existing `defendableos.com` Pages project at this repo (or create a ne
 Pages project and re-map the custom domain). The previous site lives in the
 `SudoSuOps/defendable` repo and is being replaced by this one (`defendable-os-v2`).
 
+## Public Contact Channels
+
+- Email: `build@defendableos.com`
+- X: https://x.com/mrdefendable
+- Hugging Face: https://huggingface.co/SwarmandBee
+
 ## Structure
 
 ```

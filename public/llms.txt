@@ -52,6 +52,6 @@ Every DefendableOS run can produce a complete, portable proof set:
 
 Email: build@defendableos.com
 Hugging Face: https://huggingface.co/SwarmandBee
-X: https://x.com/swarmandbee
+X: https://x.com/mrdefendable
 GitHub: https://github.com/SudoSuOps
 LinkedIn: https://www.linkedin.com/in/donovan-mackey-89a6063b6/
